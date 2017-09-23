@@ -10,7 +10,7 @@ String.prototype.replaceAll = function(str1, str2, ignore)
 };
 var ng2tpl = `<div>
               <h1>Template 1</h1>
-              <h2>{{data.title}}</h2> 	<input name="title" type="text" [(ngModel)]="data.title" />
+              <h2>{{data.title}}</h2>
               <!--[if (gte mso 9)|(IE)]>
                   <div>Internet Explorer</div>
               <![endif]-->
