@@ -12,7 +12,6 @@ function NgForDirective($, data, options, angularTemplate) {
         //Remove angular2 syntax to be in sync with repeat
         expr = expr.replace(/\blet\b/,"").replace(/\bof\b/, 'in').trim();
 
-        console.log(expr,'-------------')
         var result = angularTemplate.helpers.parseRepeatExpression(expr);
 
         if (!result) return;
