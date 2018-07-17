@@ -1,8 +1,20 @@
 var htmlTemplate = require('angular-template');
 
+htmlTemplate.directives.push( require('./angular-directives/ngfor'))
+
+
 var data = {
     title : "Newsletter",
-    enabled : true
+    enabled : true,
+    people :  [{
+        "name": "Douglas  Pace"
+    },
+    {
+        "name": "Mcleod  Mueller"
+    },
+    {
+        "name": "Day  Meyers"
+    }]
 };
 String.prototype.replaceAll = function(str1, str2, ignore)
 {
@@ -16,11 +28,20 @@ var ng2tpl = `<div>
               <![endif]-->
               <div *ngIf="data.enabled">Enabled</div>
               <div *ngIf="!data.enabled">Not Enabled</div>
+              <div>
+                <ul>
+                  <li *ngFor="let person of data.people">
+                        {{person.name}}
+                  </li>
+                </ul>
+              </div>
             </div>`;
 var ng2servertpl = ng2tpl.replaceAll('[(ngModel)]','ht-bind');
 ng2servertpl = ng2servertpl.replaceAll('*ngIf','ht-if');
+ng2servertpl = ng2servertpl.replaceAll('*ngFor','ht-for');
 
 console.log(ng2servertpl)
+
 
 console.log(htmlTemplate(ng2servertpl, data));
 
