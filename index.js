@@ -1,19 +1,21 @@
 var htmlTemplate = require('angular-template');
 
-htmlTemplate.directives.push( require('./angular-directives/ngfor'))
+htmlTemplate.directives.push( require('./helpers/directives/ngfor'));
+htmlTemplate.pipes.slice = require('./helpers/pipes/slice');
+
 
 
 var data = {
     title : "Newsletter",
     enabled : true,
     people :  [{
-        "name": "Douglas  Pace"
-    },
-    {
-        "name": "Mcleod  Mueller"
-    },
-    {
-        "name": "Day  Meyers"
+        "name": "Windstorm"
+    },{
+        "name": "Bombasto"
+    },{
+        "name": "Magneta"
+    },{
+        "name" : "Tornado"
     }]
 };
 String.prototype.replaceAll = function(str1, str2, ignore)
@@ -29,9 +31,16 @@ var ng2tpl = `<div>
               <div *ngIf="data.enabled">Enabled</div>
               <div *ngIf="!data.enabled">Not Enabled</div>
               <div>
+                <h1>First</h1>
                 <ul>
-                  <li *ngFor="let person of data.people">
-                        {{person.name}}
+                  <li *ngFor="let person of data.people | slice:0:1;let i = index">
+                        {{person.name}} - {{i}}
+                  </li>
+                </ul>
+                <h2>Second</h2>
+                <ul>
+                  <li *ngFor="let person of data.people | slice:1:3 ; let i = index">
+                        {{person.name}} - {{i}}
                   </li>
                 </ul>
               </div>
